@@ -1,0 +1,153 @@
+id;name;grade;distance;surface;turns
+1;Hakodate Junior Stakes;2;0;0;14
+2;Marine Cup;2;1;1;31,55
+3;Sazanka TV Hai;1;1;1;42,66
+4;Queen Sho;2;1;1;47,71
+5;Diolite Kinen;1;2;1;54
+6;Kashiwa Kinen;0;1;1;57
+7;Mercury Cup;2;2;1;38,62
+8;Cluster Cup;2;0;1;40,64
+9;Mile Championship Nambu Hai;0;1;1;43,67
+10;Zen-Nippon Junior Yushun;0;1;1;24
+11;Kanto Oaks;1;2;1;35
+12;Sparking Lady Cup;2;1;1;37,61
+13;Kawasaki Kinen;0;2;1;51
+14;Empress Hai;1;2;1;53
+15;Tokyo Hai;1;0;1;43,67
+16;Ladies Prelude;1;1;1;43,67
+17;TCK Queen Hai;2;1;1;50
+18;Tokyo Sprint;2;0;1;56
+19;Niigata Junior Stakes;2;1;0;16
+20;Sapporo Junior Stakes;2;1;0;17
+21;Kokura Junior Stakes;2;0;0;17
+22;Saudi Arabia Royal Cup;2;1;0;19
+23;Artemis Stakes;2;1;0;20
+24;Keio Hai Junior Stakes;1;0;0;21
+25;Daily Hai Junior Stakes;1;1;0;21
+26;Fantasy Stakes;2;0;0;21
+27;Tokyo Sports Hai Junior Stakes;2;1;0;22
+28;Kyoto Junior Stakes;2;2;0;22
+29;Hanshin Juvenile Fillies;0;1;0;23
+30;Asahi Hai Futurity Stakes;0;1;0;23
+31;Hopeful Stakes;0;2;0;24
+32;Shinzan Kinen;2;1;0;25
+33;Fairy Stakes;2;1;0;25
+34;Keisei Hai;2;2;0;25
+35;Kisaragi Sho;2;1;0;27
+36;Queen Cup;2;1;0;27
+37;Kyodo News Hai;2;1;0;27
+38;Tulip Sho;1;1;0;29
+39;Yayoi Sho;1;2;0;29
+40;Fillies' Revue;1;0;0;29
+41;Spring Stakes;1;1;0;30
+42;Falcon Stakes;2;0;0;30
+43;Flower Cup;2;1;0;30
+44;Mainichi Hai;2;1;0;30
+45;New Zealand Trophy;1;1;0;31
+46;Arlington Cup;2;1;0;31
+47;Oka Sho;0;1;0;31
+48;Satsuki Sho;0;2;0;31
+49;Flora Stakes;1;2;0;32
+50;Aoba Sho;1;2;0;32
+51;Kyoto Shimbun Hai;1;2;0;33
+52;NHK Mile Cup;0;1;0;33
+53;Aoi Stakes;2;0;0;34
+54;Japanese Oaks;0;2;0;34
+55;Japanese Derby (Tokyo Yushun);0;2;0;34
+56;Naruo Kinen;2;2;0;35,59
+57;Mermaid Stakes;2;2;0;35,59
+58;Epsom Cup;2;1;0;35,59
+59;Yasuda Kinen;0;1;0;35,59
+60;Japan Dirt Derby;0;2;1;37
+61;Unicorn Stakes;2;1;1;36
+62;CBC Sho;2;0;0;37,61
+63;Radio Nikkei Sho;2;1;0;37
+64;Procyon Stakes;2;0;1;37,61
+65;Tanabata Sho;2;2;0;37,61
+66;Hakodate Kinen;2;2;0;37,61
+67;Takarazuka Kinen;0;2;0;36,60
+68;Chukyo Kinen;2;1;0;38,62
+69;Ibis Summer Dash;2;0;0;38,62
+70;Queen Stakes;2;1;0;38,62
+71;Kokura Kinen;2;2;0;39,63
+72;Leopard Stakes;2;1;1;39
+73;Sekiya Kinen;2;1;0;39,63
+74;Elm Stakes;2;1;1;39,63
+75;Sapporo Kinen;1;2;0;40,64
+76;Kitakyushu Kinen;2;0;0;40,64
+77;Keeneland Cup;2;0;0;40,64
+78;Centaur Stakes;1;0;0;41,65
+79;Rose Stakes;1;1;0;41
+80;Niigata Kinen;2;2;0;41,65
+81;Shion Stakes;2;2;0;41
+82;Keisei Hai Autumn Handicap;2;1;0;41,65
+83;St. Lite Kinen;1;2;0;42
+84;Kobe Shimbun Hai;1;2;0;42
+85;All Comers;1;2;0;42,66
+86;Sirius Stakes;2;2;1;42,66
+87;Sprinters Stakes;0;0;0;42,66
+88;Mainichi Okan;1;1;0;43,67
+89;Kyoto Daishoten;1;2;0;43,67
+90;Fuchu Umamusume Stakes;1;1;0;43
+91;Fuji Stakes;1;1;0;44,68
+92;Swan Stakes;1;0;0;44,68
+93;Shuka Sho;0;2;0;44
+94;Kikuka Sho;0;3;0;44
+95;Tenno Sho (Autumn);0;2;0;44,68
+96;JBC Classic;0;2;1;45,69
+97;JBC Sprint;0;0;1;45,69
+98;JBC Ladies' Classic;0;1;1;45,69
+99;Copa Republica Argentina;1;3;0;45,69
+100;Miyako Stakes;2;1;1;45,69
+101;Musashino Stakes;2;1;1;45,69
+102;Fukushima Kinen;2;2;0;45,69
+103;Queen Elizabeth II Cup;0;2;0;45,69
+104;Keihan Hai;2;0;0;46,70
+105;Mile Championship;0;1;0;46,70
+106;Japan Cup;0;2;0;46,70
+107;Champions Cup;0;1;1;47,71
+108;Stayers Stakes;1;3;0;47,71
+109;Challenge Cup;2;2;0;47,71
+110;Chunichi Shimbun Hai;2;2;0;47,71
+111;Capella Stakes;2;0;1;47,71
+112;Turquoise Stakes;2;1;0;47,71
+113;Arima Kinen;0;3;0;48,72
+114;Tokyo Daishoten;0;2;1;48,72
+115;Hanshin Cup;1;0;0;48,72
+116;Nikkei Shinshun Hai;1;2;0;49
+117;Kyoto Kimpai;2;1;0;49
+118;Nakayama Kimpai;2;2;0;49
+119;Aichi Hai;2;2;0;49
+120;Tokai Stakes;1;1;1;50
+121;American JCC (Jockey Club Cup);1;2;0;50
+122;Silk Road Stakes;2;0;0;50
+123;Negishi Stakes;2;0;1;50
+124;Kyoto Kinen;1;2;0;51
+125;Tokyo Shimbun Hai;2;1;0;51
+126;Nakayama Kinen;1;1;0;52
+127;Kyoto Umamusume Stakes;2;0;0;52
+128;Diamond Stakes;2;3;0;52
+129;Kokura Daishoten;2;1;0;52
+130;Hankyu Hai;2;0;0;52
+131;February Stakes;0;1;1;52
+132;Kinko Sho;1;2;0;53
+133;Ocean Stakes;2;0;0;53
+134;Nakayama Umamusume Stakes;2;1;0;53
+135;Hanshin Daishoten;1;3;0;54
+136;Nikkei Sho;1;3;0;54
+137;March Stakes;2;1;1;54
+138;Takamatsunomiya Kinen;0;0;0;54
+139;Osaka Hai;0;2;0;54
+140;Hanshin Umamusume Stakes;1;1;0;55
+141;Lord Derby Challenge Trophy;2;1;0;55
+142;Antares Stakes;2;1;1;55
+143;Milers Cup (Yomiuri);1;1;0;56
+144;Fukushima Umamusume Stakes;2;1;0;56
+145;Tenno Sho (Spring);0;3;0;56
+146;Keio Hai Spring Cup;1;0;0;57
+147;Niigata Daishoten;2;2;0;57
+148;Victoria Mile;0;1;0;57
+149;Meguro Kinen;1;3;0;58
+150;Heian Stakes;2;2;1;58
+151;Teio Sho;0;2;1;60
+152;Hakodate Sprint Stakes;2;0;0;36,60
