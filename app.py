@@ -18,7 +18,6 @@ import faulthandler
 faulthandler.enable()
 
 import streamlit as st
-import pandas as pd
 import io
 import openpyxl
 from openpyxl.styles import Font, Alignment, PatternFill
@@ -117,102 +116,88 @@ div[data-testid="stContainer"]:hover {
 
 
 
-# Helper to generate Excel binary data
+# Generate Excel spreadsheet
 def generate_excel_file(careers, base_ranks):
+    wb = openpyxl.Workbook()
+    # Remove default sheet
+    if "Sheet" in wb.sheetnames:
+        wb.remove(wb["Sheet"])
+        
+    for idx, career in enumerate(careers):
+        sheet_name = f"Career {idx + 1}"
+        ws = wb.create_sheet(title=sheet_name)
+        
+        # Print build details at top
+        build_reqs = get_build_requirements(career['build'])
+        build_str = "No upgrades needed"
+        if build_reqs['total_stars'] > 0:
+            parts = []
+            for attr, info in build_reqs['attributes'].items():
+                base_val = base_ranks.get(attr, 0)
+                final_val = min(6, base_val + info['steps'])
+                final_letter = RANK_NAMES.get(final_val, 'G')
+                parts.append(f"+{info['steps']} {attr.capitalize()} ({info['stars']}★, {info['slots']} slots, [{final_letter}])")
+            build_str = ", ".join(parts)
+            
+        # Write metadata at the top
+        ws['A1'] = "Inheritance Build:"
+        ws['A1'].font = Font(bold=True, size=11, color="4B2375")
+        ws['B1'] = build_str
+        ws['B1'].font = Font(bold=True, size=11)
+        
+        ws['A2'] = "Total Stars Required:"
+        ws['A2'].font = Font(color="555555")
+        ws['B2'] = f"{build_reqs['total_stars']}★ (Max 18★)"
+        
+        ws['C2'] = "Total Slots Required:"
+        ws['C2'].font = Font(color="555555")
+        ws['D2'] = f"{build_reqs['total_slots']} slots (Max 6)"
+        
+        # Write table headers
+        headers = ['Turn', 'Calendar', 'Race Name', 'Grade', 'Distance', 'Surface']
+        header_fill = PatternFill(start_color="1F1235", end_color="1F1235", fill_type="solid")
+        header_font = Font(name="Calibri", size=11, bold=True, color="FFFFFF")
+        header_align = Alignment(horizontal="center", vertical="center")
+        
+        for col_idx, header in enumerate(headers, 1):
+            cell = ws.cell(row=4, column=col_idx, value=header)
+            cell.fill = header_fill
+            cell.font = header_font
+            cell.alignment = header_align
+            
+        # Write schedule details row by row
+        for turn in range(1, 73):
+            race = career['schedule'][turn]
+            
+            year_name = "Junior" if turn <= 24 else ("Classic" if turn <= 48 else "Senior")
+            turn_in_year = (turn - 1) % 24
+            month = (turn_in_year // 2) + 1
+            half = "Early" if (turn_in_year % 2) == 0 else "Late"
+            
+            month_names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+            month_name = month_names[month - 1]
+            time_str = f"{year_name} {month_name} {half}"
+            
+            if race:
+                grade_str = ["G1", "G2", "G3"][race['grade']]
+                dist_str = ["Sprint", "Mile", "Medium", "Long"][race['distance']]
+                surf_str = ["Turf", "Dirt"][race['surface']]
+                
+                row_values = [turn, time_str, race['name'], grade_str, dist_str, surf_str]
+            else:
+                row_values = [turn, time_str, '-', '-', '-', '-']
+                
+            for col_idx, val in enumerate(row_values, 1):
+                ws.cell(row=4 + turn, column=col_idx, value=val)
+                
+        # Auto-adjust column widths
+        for col in ws.columns:
+            max_len = max(len(str(cell.value or '')) for cell in col)
+            col_letter = get_column_letter(col[0].column)
+            ws.column_dimensions[col_letter].width = max(max_len + 3, 10)
+            
     output = io.BytesIO()
-    
-    with pd.ExcelWriter(output, engine='openpyxl') as writer:
-        for idx, career in enumerate(careers):
-            sheet_name = f"Career {idx + 1}"
-            
-            # Formatting schedule details
-            schedule_data = []
-            
-            # Print build details at top
-            build_reqs = get_build_requirements(career['build'])
-            build_str = "No upgrades needed"
-            if build_reqs['total_stars'] > 0:
-                parts = []
-                for attr, info in build_reqs['attributes'].items():
-                    base_val = base_ranks.get(attr, 0)
-                    final_val = min(6, base_val + info['steps'])
-                    final_letter = RANK_NAMES.get(final_val, 'G')
-                    parts.append(f"+{info['steps']} {attr.capitalize()} ({info['stars']}★, {info['slots']} slots, [{final_letter}])")
-                build_str = ", ".join(parts)
-                
-            for turn in range(1, 73):
-                race = career['schedule'][turn]
-                
-                year_name = "Junior" if turn <= 24 else ("Classic" if turn <= 48 else "Senior")
-                turn_in_year = (turn - 1) % 24
-                month = (turn_in_year // 2) + 1
-                half = "Early" if (turn_in_year % 2) == 0 else "Late"
-                
-                month_names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-                month_name = month_names[month - 1]
-                time_str = f"{year_name} {month_name} {half}"
-                
-                if race:
-                    grade_str = ["G1", "G2", "G3"][race['grade']]
-                    dist_str = ["Sprint", "Mile", "Medium", "Long"][race['distance']]
-                    surf_str = ["Turf", "Dirt"][race['surface']]
-                    
-                    schedule_data.append({
-                        'Turn': turn,
-                        'Calendar': time_str,
-                        'Race Name': race['name'],
-                        'Grade': grade_str,
-                        'Distance': dist_str,
-                        'Surface': surf_str
-                    })
-                else:
-                    schedule_data.append({
-                        'Turn': turn,
-                        'Calendar': time_str,
-                        'Race Name': '-',
-                        'Grade': '-',
-                        'Distance': '-',
-                        'Surface': '-'
-                    })
-            
-            df = pd.DataFrame(schedule_data)
-            df.to_excel(writer, sheet_name=sheet_name, index=False, startrow=3)
-            
-            # Apply styling to the Excel sheet
-            workbook = writer.book
-            worksheet = writer.sheets[sheet_name]
-            
-            # Write metadata at the top
-            worksheet['A1'] = "Inheritance Build:"
-            worksheet['A1'].font = Font(bold=True, size=11, color="4B2375")
-            worksheet['B1'] = build_str
-            worksheet['B1'].font = Font(bold=True, size=11)
-            
-            worksheet['A2'] = "Total Stars Required:"
-            worksheet['A2'].font = Font(color="555555")
-            worksheet['B2'] = f"{build_reqs['total_stars']}★ (Max 18★)"
-            
-            worksheet['C2'] = "Total Slots Required:"
-            worksheet['C2'].font = Font(color="555555")
-            worksheet['D2'] = f"{build_reqs['total_slots']} slots (Max 6)"
-            
-            # Styling headers of the table
-            header_fill = PatternFill(start_color="1F1235", end_color="1F1235", fill_type="solid")
-            header_font = Font(name="Calibri", size=11, bold=True, color="FFFFFF")
-            header_align = Alignment(horizontal="center", vertical="center")
-            
-            for col in range(1, 7):
-                cell = worksheet.cell(row=4, column=col)
-                cell.fill = header_fill
-                cell.font = header_font
-                cell.alignment = header_align
-            
-            # Auto-adjust column widths
-            for col in worksheet.columns:
-                max_len = max(len(str(cell.value or '')) for cell in col)
-                col_letter = get_column_letter(col[0].column)
-                worksheet.column_dimensions[col_letter].width = max(max_len + 3, 10)
-                
+    wb.save(output)
     return output.getvalue()
 
 # App Header
@@ -577,8 +562,12 @@ with tab_results:
                         })
                         
                 if race_list_data:
-                    df_races = pd.DataFrame(race_list_data)
-                    st.dataframe(df_races, hide_index=True, width="stretch")
+                    # Render schedule table
+                    md_table = "| Turn | Calendar | Race Name | Grade | Distance | Surface |\n"
+                    md_table += "| :--- | :--- | :--- | :--- | :--- | :--- |\n"
+                    for row in race_list_data:
+                        md_table += f"| {row['Turn']} | {row['Calendar']} | **{row['Race Name']}** | {row['Grade']} | {row['Distance']} | {row['Surface']} |\n"
+                    st.markdown(md_table, unsafe_allow_html=True)
                 else:
                     st.write("No races scheduled in this career.")
 
